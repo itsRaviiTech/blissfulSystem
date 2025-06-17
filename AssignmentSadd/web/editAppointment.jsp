@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="com.example.model.Staff"%>
+<%@page import="com.example.dao.StaffDAO"%>
+<%@page import="com.example.dao.StaffDAOImpl"%>
 <%@ page import="com.example.dao.AppointmentDao" %>
 <%@ page import="com.example.model.Appointment" %>
 <%@ page import="java.time.LocalDate" %>
@@ -187,11 +191,20 @@
 
         <label for="barber">Choose Barber</label>
         <select name="barber" id="barber" required>
-            <option value="">-- Select a Barber --</option>
-            <option value="John" <%= "John".equals(appointment.getBarber()) ? "selected" : "" %>>John</option>
-            <option value="Mike" <%= "Mike".equals(appointment.getBarber()) ? "selected" : "" %>>Mike</option>
-            <option value="Alex" <%= "Alex".equals(appointment.getBarber()) ? "selected" : "" %>>Alex</option>
-        </select>
+                    <option value="">-- Select a Barber --</option>
+                    <%
+                        StaffDAO staffDAO = new StaffDAOImpl();
+                        List<Staff> barbers = staffDAO.getAvailableBarbers();
+
+                        for (Staff barber : barbers) {
+                    %>
+                    <option value="<%= barber.getId()%>">
+                        <%= barber.getName()%> (<%= barber.getExpertise()%>)
+                    </option>
+                    <%
+                        }
+                    %>
+                </select>
 
         <label>Add-ons</label>
         <div class="addons-group">
