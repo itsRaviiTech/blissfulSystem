@@ -39,7 +39,7 @@ public class StaffServlet extends HttpServlet {
         request.getServletContext().setAttribute("staffList", staffDAO.getAllStaff());
 
         // Forward to JSP
-        request.getRequestDispatcher("staff.jsp").forward(request, response);
+        request.getRequestDispatcher("manageStaff.jsp").forward(request, response);
     }
 
     @Override

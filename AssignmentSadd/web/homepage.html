@@ -3,83 +3,406 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Barber Shop</title>
+  <title>Blissful Barber</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #d35400;
+      --accent-color: #e67e22;
+      --text-dark: #2c3e50;
+      --text-light: #7f8c8d;
+      --bg-light: #f8f9fa;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-light);
+      margin: 0;
+      padding: 0;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-color), #34495e) !important;
+      box-shadow: var(--shadow);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fff !important;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.9) !important;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-color) !important;
+    }
+
+    .btn-login {
+      background: var(--secondary-color);
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
     .hero {
-  background: url('https://images.unsplash.com/photo-1605525384406-e66b9efb5f35') center/cover no-repeat;
-  color: #000; /* <-- now text is black */
-  padding: 7rem 2rem;
-  text-align: center;
-}
+      background: linear-gradient(135deg, rgba(44, 62, 80, 0.8), rgba(52, 73, 94, 0.8)), 
+                  url('assets/salon.jpg') center/cover no-repeat;
+      color: #ffffff;
+      padding: 8rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(44, 62, 80, 0.3), rgba(211, 84, 0, 0.2));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
 
     .hero h2 {
-      font-size: 2.8rem;
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
-    .navbar-brand {
-      font-weight: 600;
-      font-size: 1.5rem;
+
+    .hero .lead {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
-    .card img, .addon-card img {
-      border-radius: 0.5rem;
+
+    /* Cards */
+    .card {
+      border: none;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      border-radius: 15px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card img {
+      border-radius: 0;
       cursor: pointer;
       transition: transform 0.3s ease;
       width: 100%;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
     }
-    .card img:hover, .addon-card img:hover {
+
+    .card img:hover {
       transform: scale(1.05);
     }
-    footer {
-      background: #111;
-      color: #fff;
-      padding: 2rem 0;
-      text-align: center;
-    }
-    footer a {
-      color: #ccc;
-      margin: 0 0.5rem;
-      text-decoration: none;
-    }
-    .service-detail {
-      display: none;
-    }
-    .btn-outline-primary:hover, .btn-outline-dark:hover {
-      background-color: #000;
-      color: #fff;
-    }
-    .section-title {
+
+    .card h5 {
+      color: var(--text-dark);
       font-weight: 600;
+      font-size: 1.2rem;
     }
-    .gallery img {
+
+    .card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+      border-radius: 2px;
+    }
+
+    /* Add-ons Section */
+    .addon-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .addon-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .addon-card img {
+      width: 100%;
       height: 250px;
       object-fit: cover;
+      transition: transform 0.3s ease;
     }
-    /* Add-ons styling */
-    .addon-card {
-      box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
-      border-radius: 0.5rem;
-      overflow: hidden;
-      background: #fff;
-      transition: box-shadow 0.3s ease;
+
+    .addon-card:hover img {
+      transform: scale(1.1);
     }
-    .addon-card:hover {
-      box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+
+    .addon-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: white;
+      padding: 2rem 1.5rem 1.5rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .addon-card:hover .addon-overlay {
+      transform: translateY(0);
+    }
+
+    .addon-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .addon-description {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 0;
+    }
+
+    /* Booking Section */
+    .booking-section {
+      background: linear-gradient(135deg, var(--primary-color), #34495e);
+      color: white;
+      padding: 5rem 2rem;
+      margin-top: 4rem;
+    }
+
+    .booking-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .booking-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .booking-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .booking-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .booking-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+    }
+
+    .booking-card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .booking-card h4 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .booking-card p {
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(211, 84, 0, 0.3);
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--text-dark);
+      border: 2px solid white;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-light:hover {
+      background: transparent;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-primary {
+      border: 2px solid var(--secondary-color);
+      color: var(--secondary-color);
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+      background: var(--secondary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-dark {
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-dark:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Service Detail Box */
+    .service-detail {
+      display: none;
+      background: white;
+      border-radius: 15px;
+      box-shadow: var(--shadow-hover);
+      border: none;
+    }
+
+    .service-detail h4 {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .service-detail p {
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+      color: #fff;
+      padding: 3rem 0 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    footer a {
+      color: var(--accent-color);
+      margin: 0 0.5rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+      
+      .hero .lead {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .booking-cards {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">✂️ Astu Barber</a>
+    <a class="navbar-brand" href="#">The Blissful Barber</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -89,10 +412,12 @@
         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
         <li class="nav-item"><a class="nav-link" href="#addons">Add-ons</a></li>
         <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
-        <li class="nav-item"><a class="nav-link" href="#viewAppointments">Appointments</a></li>
-        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-2">
+          <a href="Login.jsp" class="btn btn-login text-white">
+            Login
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -100,46 +425,56 @@
 
 <!-- Hero Section -->
 <section class="hero">
-  <h2>Redefining Gentlemen’s Grooming – Barber</h2>
-  <p class="lead">Professional haircuts, shaves, and grooming for the modern man.</p>
-  <a href="#booking" class="btn btn-primary btn-lg me-2">Book Appointment</a>
-  <a href="#services" class="btn btn-light btn-lg">Explore Services</a>
+  <div class="hero-content">
+    <h2>Redefining Gentlemen's Grooming</h2>
+    <p class="lead">Professional haircuts, shaves, and grooming for the modern man.</p>
+    <a href="#booking" class="btn btn-primary btn-lg me-3">Book Appointment</a>
+    <a href="#services" class="btn btn-light btn-lg">Explore Services</a>
+  </div>
 </section>
 
 <!-- Services -->
 <section class="container py-5" id="services">
-  <h2 class="text-center section-title mb-4">Our Services</h2>
+  <h2 class="text-center section-title">Our Services</h2>
   <div class="row g-4">
     <div class="col-md-3">
       <div class="card h-100 text-center p-3 service-card" data-service="haircut">
-        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Haircut" />
-        <h5 class="mt-3">✂️ Haircut</h5>
-        <p>Classic or modern styles tailored to your look.</p>
-        <button class="btn btn-outline-primary btn-sm">More Details</button>
+        <img src="assets/haircut.jpg" alt="Haircut" />
+        <div class="card-body">
+          <h5 class="mt-3">✂️ Haircut</h5>
+          <p>Classic or modern styles tailored to your look.</p>
+          <button class="btn btn-outline-primary btn-sm">More Details</button>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
       <div class="card h-100 text-center p-3 service-card" data-service="beard">
-        <img src="https://images.unsplash.com/photo-1517260914603-857f5b5f1f9a?auto=format&fit=crop&w=600&q=80" alt="Beard Trim" />
-        <h5 class="mt-3">🧔 Beard Trim</h5>
-        <p>Precision trimming & shaping for the perfect beard.</p>
-        <button class="btn btn-outline-primary btn-sm">More Details</button>
+        <img src="assets/beard trim.jpg" alt="Beard Trim" />
+        <div class="card-body">
+          <h5 class="mt-3">🧔 Beard Trim</h5>
+          <p>Precision trimming & shaping for the perfect beard.</p>
+          <button class="btn btn-outline-primary btn-sm">More Details</button>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
       <div class="card h-100 text-center p-3 service-card" data-service="shaving">
-        <img src="https://images.unsplash.com/photo-1587730881506-7ec84b1a70a0?auto=format&fit=crop&w=600&q=80" alt="Shaving" />
-        <h5 class="mt-3">🪒 Shaving</h5>
-        <p>Hot towel shaves for a refreshing finish.</p>
-        <button class="btn btn-outline-primary btn-sm">More Details</button>
+        <img src="assets/shaving.jpg" alt="Shaving" />
+        <div class="card-body">
+          <h5 class="mt-3">🪒 Shaving</h5>
+          <p>Hot towel shaves for a refreshing finish.</p>
+          <button class="btn btn-outline-primary btn-sm">More Details</button>
+        </div>
       </div>
     </div>
     <div class="col-md-3">
       <div class="card h-100 text-center p-3 service-card" data-service="coloring">
-        <img src="https://images.unsplash.com/photo-1546456073-92b87eecf821?auto=format&fit=crop&w=600&q=80" alt="Hair Coloring" />
-        <h5 class="mt-3">🎨 Hair Coloring</h5>
-        <p>Enhance your look with bold or subtle colors.</p>
-        <button class="btn btn-outline-primary btn-sm">More Details</button>
+        <img src="assets/hair_coloring.jpg" alt="Hair Coloring" />
+        <div class="card-body">
+          <h5 class="mt-3">🎨 Hair Coloring</h5>
+          <p>Enhance your look with bold or subtle colors.</p>
+          <button class="btn btn-outline-primary btn-sm">More Details</button>
+        </div>
       </div>
     </div>
   </div>
@@ -147,21 +482,33 @@
 
 <!-- Add-ons Section -->
 <section class="container py-5" id="addons">
-  <h2 class="text-center section-title mb-4">Add-on Services</h2>
+  <h2 class="text-center section-title">Premium Add-on Services</h2>
   <div class="row g-4">
     <div class="col-md-4">
       <div class="addon-card" data-addon="massage">
-        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Massage" />
+        <img src="assets/head_massage.jpg" alt="Massage" />
+        <div class="addon-overlay">
+          <div class="addon-title">💆‍♂️ Relaxing Massage</div>
+          <div class="addon-description">Professional full-body massage to relieve tension and stress</div>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="addon-card" data-addon="facial">
-        <img src="https://images.unsplash.com/photo-1556228724-4c5be83e0862?auto=format&fit=crop&w=600&q=80" alt="Facial" />
+        <img src="assets/facial.jpg" alt="Facial" />
+        <div class="addon-overlay">
+          <div class="addon-title">🧴 Rejuvenating Facial</div>
+          <div class="addon-description">Deep cleansing and nourishing treatment for healthy skin</div>
+        </div>
       </div>
     </div>
     <div class="col-md-4">
       <div class="addon-card" data-addon="scalpTreatment">
-        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80" alt="Scalp Treatment" />
+        <img src="assets/scalp_treatment.jpg" alt="Scalp Treatment" />
+        <div class="addon-overlay">
+          <div class="addon-title">🌿 Scalp Treatment</div>
+          <div class="addon-description">Specialized treatment for healthy hair growth and scalp care</div>
+        </div>
       </div>
     </div>
   </div>
@@ -169,7 +516,7 @@
 
 <!-- Detail Box -->
 <div class="container">
-  <div class="service-detail mt-4 p-4 border rounded bg-white shadow-sm" id="service-detail-box">
+  <div class="service-detail mt-4 p-4 border rounded shadow-sm" id="service-detail-box">
     <h4 id="detail-title"></h4>
     <p id="detail-description"></p>
     <button class="btn btn-secondary btn-sm" onclick="hideDetail()">Close</button>
@@ -177,84 +524,114 @@
 </div>
 
 <!-- Booking Section -->
-<section class="text-center py-5 bg-light" id="booking">
-  <h2 class="mb-3">Book Your Appointment</h2>
-  <p>We’re here to serve you every day. Pick a service and time that fits you best.</p>
-  <a href="BookAppointment.jsp" class="btn btn-primary btn-lg">Start Booking</a>
-</section>
-
-<!-- View Appointments Section -->
-<section class="container py-5 text-center border rounded bg-white shadow-sm" id="viewCustomer">
-  <h2 class="mb-3">Your Appointments</h2>
-  <p>Check your upcoming appointments and details.</p>
-  <a href="viewCustomer" class="btn btn-outline-dark btn-lg">View My Appointments</a>
-</section>
-
-<!-- Gallery -->
-<section class="container py-5" id="gallery">
-  <h2 class="text-center mb-4">Gallery</h2>
-  <div class="row g-4 gallery">
-    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1603297632053-cb0d97139913" class="img-fluid rounded" alt="Haircut"></div>
-    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1597256200443-6e1405f4b17f" class="img-fluid rounded" alt="Beard"></div>
-    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1571175351233-df8e16166841" class="img-fluid rounded" alt="Interior"></div>
+<section class="booking-section" id="booking">
+  <div class="container text-center">
+    <h2>Book Your Perfect Grooming Experience</h2>
+    <p>Choose your service and let our expert barbers take care of the rest. Available 7 days a week.</p>
+    
+    <div class="booking-cards">
+      <div class="booking-card">
+        <div class="booking-card-icon">📅</div>
+        <h4>Book New Appointment</h4>
+        <p>Schedule your next grooming session with our skilled barbers</p>
+        <a href="Login.jsp" class="btn btn-primary">Start Booking</a>
+      </div>
+      
+      <div class="booking-card">
+        <div class="booking-card-icon">📋</div>
+        <h4>Manage Appointments</h4>
+        <p>View, modify, or cancel your existing appointments</p>
+        <a href="Login.jsp" class="btn btn-outline-light">View Appointments</a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- About Us -->
-<section class="container py-5" id="about">
-  <h2 class="text-center mb-3">About Us</h2>
-  <p class="text-center mx-auto" style="max-width: 600px;">
-    Astu Barber is where classic meets modern. With years of experience, our barbers provide top-tier grooming to every customer who walks through our door.
-  </p>
-  <div class="row justify-content-center mt-4">
-    <div class="col-md-6"><img src="https://images.unsplash.com/photo-1600080213300-9dc43b2ecb65" class="img-fluid rounded" alt="Team"></div>
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" required>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Login</button>
+        <div class="w-100 text-center mt-2">
+          <small><a href="#" class="text-muted">Don't have an account? Sign up</a></small>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 <!-- Footer -->
-<footer class="mt-5" id="contact">
+<footer id="contact">
   <div class="container">
-    <p>📍 No.12, Jalan Gaya, Kuala Lumpur | 📞 012-3456789 | 📧 barber@email.com</p>
-    <p>Open Daily: 10:00 AM – 9:00 PM</p>
-    <p>
-      <a href="#">Facebook</a> |
-      <a href="#">Instagram</a> |
-      <a href="#">TikTok</a>
-    </p>
-    <p>&copy; 2025 Astu Barber Shop. All Rights Reserved.</p>
+    <div class="row">
+      <div class="col-md-12">
+        <p><strong>📍 Address:</strong> No.12, Jalan Gaya, Kuala Lumpur</p>
+        <p><strong>📞 Phone:</strong> 012-3456789 | <strong>📧 Email:</strong> barber@email.com</p>
+        <p><strong>🕒 Hours:</strong> Open Daily: 10:00 AM – 9:00 PM</p>
+        <div class="mt-3">
+          <a href="#">Facebook</a> |
+          <a href="#">Instagram</a> |
+          <a href="#">TikTok</a>
+        </div>
+        <hr class="my-4" style="opacity: 0.3;">
+        <p>&copy; 2025 The Blissful Barber Shop. All Rights Reserved.</p>
+      </div>
+    </div>
   </div>
 </footer>
 
-<!-- JS for Service and Add-on Details -->
+<!-- JavaScript -->
 <script>
   const serviceDetails = {
     haircut: {
-      title: 'Haircut',
-      description: 'Choose from classic or trendy styles tailored to suit your face shape. We cut with precision and consult with care.'
+      title: '✂️ Professional Haircut',
+      description: 'Our expert barbers provide precision cuts ranging from classic gentleman\'s styles to modern trendy looks. We consider your face shape, hair type, and personal style to create the perfect cut that suits you best. Each service includes consultation, wash, cut, and styling.'
     },
     beard: {
-      title: 'Beard Trim',
-      description: 'Get your beard perfectly shaped and cleaned using professional tools and techniques.'
+      title: '🧔 Expert Beard Trim',
+      description: 'Achieve the perfect beard shape with our professional trimming service. We use premium tools and techniques to sculpt your facial hair, maintaining clean lines and proper proportions. Includes beard wash, trim, shaping, and conditioning treatment.'
     },
     shaving: {
-      title: 'Shaving',
-      description: 'A soothing hot towel shave using premium blades and aftercare for a refreshing finish.'
+      title: '🪒 Traditional Hot Towel Shave',
+      description: 'Experience the luxury of a traditional barber shop shave. Our service includes hot towel treatment, premium shaving cream application, expert razor technique, and soothing aftercare. Leaves your skin smooth, refreshed, and perfectly groomed.'
     },
     coloring: {
-      title: 'Hair Coloring',
-      description: 'From subtle highlights to bold tones, our coloring services are safe and stylish.'
+      title: '🎨 Professional Hair Coloring',
+      description: 'Transform your look with our professional coloring services. From subtle highlights to bold color changes, we use high-quality products and techniques. Our stylists will help you choose the perfect shade to complement your skin tone and personal style.'
     },
     massage: {
-      title: 'Massage',
-      description: 'Relax your body and mind with a professional full-body massage designed to relieve tension and improve circulation.'
+      title: '💆‍♂️ Relaxing Full-Body Massage',
+      description: 'Unwind and rejuvenate with our professional massage therapy. Our skilled therapists use various techniques to relieve muscle tension, improve circulation, and promote relaxation. Perfect addition to any grooming service for the ultimate pampering experience.'
     },
     facial: {
-      title: 'Facial',
-      description: 'Nourish and rejuvenate your skin with our tailored facial treatments that cleanse, exfoliate, and hydrate.'
+      title: '🧴 Rejuvenating Facial Treatment',
+      description: 'Revitalize your skin with our comprehensive facial treatment. Includes deep cleansing, exfoliation, extraction, moisturizing mask, and hydration. Tailored to your skin type to address specific concerns and leave you with a healthy, glowing complexion.'
     },
     scalpTreatment: {
-      title: 'Scalp Treatment',
-      description: 'Stimulate your scalp with our specialized treatments promoting healthy hair growth and relaxation.'
+      title: '🌿 Therapeutic Scalp Treatment',
+      description: 'Promote healthy hair growth and scalp wellness with our specialized treatment. Includes scalp massage, nourishing oils, and therapeutic techniques to stimulate circulation, reduce dandruff, and improve overall hair health. Leaves your scalp feeling refreshed and revitalized.'
     }
   };
 
@@ -267,10 +644,10 @@
     });
   });
 
-  // Show details on addon image click
-  document.querySelectorAll('.addon-card img').forEach(img => {
-    img.addEventListener('click', (e) => {
-      const addon = e.target.closest('.addon-card').getAttribute('data-addon');
+  // Show details on addon click
+  document.querySelectorAll('.addon-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const addon = card.getAttribute('data-addon');
       showDetail(addon);
     });
   });
@@ -279,12 +656,29 @@
     document.getElementById('detail-title').innerText = serviceDetails[key].title;
     document.getElementById('detail-description').innerText = serviceDetails[key].description;
     document.getElementById('service-detail-box').style.display = 'block';
-    window.scrollTo({ top: document.getElementById('service-detail-box').offsetTop - 100, behavior: 'smooth' });
+    document.getElementById('service-detail-box').scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'center' 
+    });
   }
 
   function hideDetail() {
     document.getElementById('service-detail-box').style.display = 'none';
   }
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
