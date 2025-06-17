@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Blissful Barber Appointment System</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;   /* Navy */
+            --accent-color: #d35400;    /* Warm orange */
+            --background-color: #f4f7f9;
+            --text-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 50%;
+            margin: 80px auto;
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-group a {
+            text-decoration: none;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+        }
+
+        .btn-group a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .btn-group a {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<style>
+body {
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background: url('assets/salon.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+}
+</style>
+<body>
+    <div class="container">
+        <!-- Optional logo -->
+        <!-- <img src="images/barber-logo.png" alt="Blissful Barber Logo" class="logo"> -->
+
+        <h2>Welcome to BLISSFUL BARBER</h2>
+        <div class="btn-group">
+            <a href="login.html">Login to Manage Appointments</a>
+            <a href="manageStaff.jsp">Login to Manage Staff</a>
+            <a href="viewCustomer">View All Appointments</a>
+            <a href="BookAppointment.jsp">Book an Appointment (Customer)</a>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Blissful Barber. All rights reserved.
+    </footer>
+</body>
+</html>

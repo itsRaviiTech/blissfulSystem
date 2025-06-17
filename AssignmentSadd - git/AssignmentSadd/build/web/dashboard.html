@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Staff Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .assign-staff-btn, .add-staff-btn, .delete-staff-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .assign-staff-btn:hover, .add-staff-btn:hover, .delete-staff-btn:hover {
+            background-color: #45a049;
+        }
+        .assigned-table {
+            margin-top: 30px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .assigned-table th, .assigned-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .assigned-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .assigned-table td button {
+            margin: 2px;
+        }
+        .edit-btn {
+            background-color: #4285f4;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .inform-btn {
+            background-color: #00bcd4;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .save-btn, .cancel-btn {
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 5px;
+            border: none;
+        }
+        .save-btn { background-color: #4CAF50; color: white; }
+        .cancel-btn { background-color: #ccc; color: black; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Staff Schedule Management</h2>
+
+    <div class="form-group">
+        <label for="newStaffName">Add New Staff</label>
+        <input type="text" id="newStaffName" placeholder="Enter new staff name">
+    </div>
+    <button class="add-staff-btn" onclick="addStaff()">Add Staff</button>
+
+    <div class="form-group">
+        <label for="deleteStaffSelect">Delete Staff</label>
+        <select id="deleteStaffSelect"></select>
+        <button class="delete-staff-btn" onclick="deleteStaff()">Delete Selected Staff</button>
+    </div>
+
+    <div class="form-group">
+        <label for="daySelect">Select Day</label>
+        <select id="daySelect">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="staffSelect">Select Staff</label>
+        <select id="staffSelect"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="workTime">Work Time</label>
+        <input type="time" id="workTime">
+    </div>
+
+    <button class="assign-staff-btn" onclick="assignStaff()">Assign Staff</button>
+
+    <table class="assigned-table" id="assignedTable">
+        <thead>
+        <tr>
+            <th>Day</th>
+            <th>Staff</th>
+            <th>Work Time</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="assignedTableBody"></tbody>
+    </table>
+</div>
+
+<script>
+    let staffAssignments = [];
+    let staffList = ["Staff 1", "Staff 2", "Staff 3"];
+
+    function assignStaff() {
+        const day = document.getElementById('daySelect').value;
+        const staff = document.getElementById('staffSelect').value;
+        const workTime = document.getElementById('workTime').value;
+        if (!workTime) return alert('Please enter a work time.');
+
+        staffAssignments.push({ day, staff, time: workTime });
+        updateAssignedTable();
+    }
+
+    function addStaff() {
+        const name = document.getElementById('newStaffName').value.trim();
+        if (!name) return alert('Enter a staff name.');
+        staffList.push(name);
+        updateStaffSelect();
+        document.getElementById('newStaffName').value = '';
+    }
+
+    function deleteStaff() {
+        const staffToDelete = document.getElementById('deleteStaffSelect').value;
+        staffList = staffList.filter(name => name !== staffToDelete);
+        staffAssignments = staffAssignments.filter(a => a.staff !== staffToDelete);
+        updateStaffSelect();
+        updateAssignedTable();
+        alert(`Information sent: ${staffToDelete} has been removed.`);
+    }
+
+    function deleteAssignment(index) {
+        staffAssignments.splice(index, 1);
+        updateAssignedTable();
+    }
+
+    function informStaff(staff, day) {
+        alert(`Staff member ${staff}, you are assigned to work on ${day}.`);
+    }
+
+    function updateStaffSelect() {
+        const select = document.getElementById('staffSelect');
+        const deleteSelect = document.getElementById('deleteStaffSelect');
+        select.innerHTML = '';
+        deleteSelect.innerHTML = '';
+        staffList.forEach(name => {
+            const opt = document.createElement('option');
+            opt.value = name;
+            opt.textContent = name;
+            select.appendChild(opt);
+
+            const opt2 = document.createElement('option');
+            opt2.value = name;
+            opt2.textContent = name;
+            deleteSelect.appendChild(opt2);
+        });
+    }
+
+    function updateAssignedTable() {
+        const body = document.getElementById('assignedTableBody');
+        body.innerHTML = '';
+
+        staffAssignments.forEach((a, i) => {
+            const row = document.createElement('tr');
+
+            if (a.editing) {
+                const dayOptions = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+                    .map(d => `<option value="${d}" ${a.day === d ? 'selected' : ''}>${d}</option>`)
+                    .join('');
+
+                const staffOptions = staffList
+                    .map(s => `<option value="${s}" ${a.staff === s ? 'selected' : ''}>${s}</option>`)
+                    .join('');
+
+                row.innerHTML = `
+                    <td><select id="editDay${i}">${dayOptions}</select></td>
+                    <td><select id="editStaff${i}">${staffOptions}</select></td>
+                    <td><input type="time" id="editTime${i}" value="${a.time}"></td>
+                    <td>
+                        <button class="save-btn" onclick="saveEdit(${i})">Save</button>
+                        <button class="cancel-btn" onclick="cancelEdit(${i})">Cancel</button>
+                    </td>
+                `;
+            } else {
+                row.innerHTML = `
+                    <td>${a.day}</td>
+                    <td>${a.staff}</td>
+                    <td>${a.time}</td>
+                    <td>
+                        <button class="edit-btn" onclick="editAssignment(${i})">Edit</button>
+                        <button class="delete-btn" onclick="deleteAssignment(${i})">Delete</button>
+                        <button class="inform-btn" onclick="informStaff('${a.staff}', '${a.day}')">Inform</button>
+                    </td>
+                `;
+            }
+
+            body.appendChild(row);
+        });
+    }
+
+    function editAssignment(index) {
+        staffAssignments[index].editing = true;
+        updateAssignedTable();
+    }
+
+    function saveEdit(index) {
+        const day = document.getElementById(`editDay${index}`).value;
+        const staff = document.getElementById(`editStaff${index}`).value;
+        const time = document.getElementById(`editTime${index}`).value;
+
+        staffAssignments[index] = { day, staff, time };
+        updateAssignedTable();
+    }
+
+    function cancelEdit(index) {
+        delete staffAssignments[index].editing;
+        updateAssignedTable();
+    }
+
+    updateStaffSelect();
+</script>
+</body>
+</html>
