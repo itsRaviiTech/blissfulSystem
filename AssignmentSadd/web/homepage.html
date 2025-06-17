@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Barber Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .hero {
+  background: url('https://images.unsplash.com/photo-1605525384406-e66b9efb5f35') center/cover no-repeat;
+  color: #000; /* <-- now text is black */
+  padding: 7rem 2rem;
+  text-align: center;
+}
+
+    .hero h2 {
+      font-size: 2.8rem;
+    }
+    .navbar-brand {
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+    .card img, .addon-card img {
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card img:hover, .addon-card img:hover {
+      transform: scale(1.05);
+    }
+    footer {
+      background: #111;
+      color: #fff;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    footer a {
+      color: #ccc;
+      margin: 0 0.5rem;
+      text-decoration: none;
+    }
+    .service-detail {
+      display: none;
+    }
+    .btn-outline-primary:hover, .btn-outline-dark:hover {
+      background-color: #000;
+      color: #fff;
+    }
+    .section-title {
+      font-weight: 600;
+    }
+    .gallery img {
+      height: 250px;
+      object-fit: cover;
+    }
+    /* Add-ons styling */
+    .addon-card {
+      box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+      border-radius: 0.5rem;
+      overflow: hidden;
+      background: #fff;
+      transition: box-shadow 0.3s ease;
+    }
+    .addon-card:hover {
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">✂️ Astu Barber</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#addons">Add-ons</a></li>
+        <li class="nav-item"><a class="nav-link" href="#booking">Booking</a></li>
+        <li class="nav-item"><a class="nav-link" href="#viewAppointments">Appointments</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h2>Redefining Gentlemen’s Grooming – Barber</h2>
+  <p class="lead">Professional haircuts, shaves, and grooming for the modern man.</p>
+  <a href="#booking" class="btn btn-primary btn-lg me-2">Book Appointment</a>
+  <a href="#services" class="btn btn-light btn-lg">Explore Services</a>
+</section>
+
+<!-- Services -->
+<section class="container py-5" id="services">
+  <h2 class="text-center section-title mb-4">Our Services</h2>
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card h-100 text-center p-3 service-card" data-service="haircut">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Haircut" />
+        <h5 class="mt-3">✂️ Haircut</h5>
+        <p>Classic or modern styles tailored to your look.</p>
+        <button class="btn btn-outline-primary btn-sm">More Details</button>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100 text-center p-3 service-card" data-service="beard">
+        <img src="https://images.unsplash.com/photo-1517260914603-857f5b5f1f9a?auto=format&fit=crop&w=600&q=80" alt="Beard Trim" />
+        <h5 class="mt-3">🧔 Beard Trim</h5>
+        <p>Precision trimming & shaping for the perfect beard.</p>
+        <button class="btn btn-outline-primary btn-sm">More Details</button>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100 text-center p-3 service-card" data-service="shaving">
+        <img src="https://images.unsplash.com/photo-1587730881506-7ec84b1a70a0?auto=format&fit=crop&w=600&q=80" alt="Shaving" />
+        <h5 class="mt-3">🪒 Shaving</h5>
+        <p>Hot towel shaves for a refreshing finish.</p>
+        <button class="btn btn-outline-primary btn-sm">More Details</button>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card h-100 text-center p-3 service-card" data-service="coloring">
+        <img src="https://images.unsplash.com/photo-1546456073-92b87eecf821?auto=format&fit=crop&w=600&q=80" alt="Hair Coloring" />
+        <h5 class="mt-3">🎨 Hair Coloring</h5>
+        <p>Enhance your look with bold or subtle colors.</p>
+        <button class="btn btn-outline-primary btn-sm">More Details</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Add-ons Section -->
+<section class="container py-5" id="addons">
+  <h2 class="text-center section-title mb-4">Add-on Services</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="addon-card" data-addon="massage">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Massage" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="addon-card" data-addon="facial">
+        <img src="https://images.unsplash.com/photo-1556228724-4c5be83e0862?auto=format&fit=crop&w=600&q=80" alt="Facial" />
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="addon-card" data-addon="scalpTreatment">
+        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80" alt="Scalp Treatment" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Detail Box -->
+<div class="container">
+  <div class="service-detail mt-4 p-4 border rounded bg-white shadow-sm" id="service-detail-box">
+    <h4 id="detail-title"></h4>
+    <p id="detail-description"></p>
+    <button class="btn btn-secondary btn-sm" onclick="hideDetail()">Close</button>
+  </div>
+</div>
+
+<!-- Booking Section -->
+<section class="text-center py-5 bg-light" id="booking">
+  <h2 class="mb-3">Book Your Appointment</h2>
+  <p>We’re here to serve you every day. Pick a service and time that fits you best.</p>
+  <a href="BookAppointment.jsp" class="btn btn-primary btn-lg">Start Booking</a>
+</section>
+
+<!-- View Appointments Section -->
+<section class="container py-5 text-center border rounded bg-white shadow-sm" id="viewCustomer">
+  <h2 class="mb-3">Your Appointments</h2>
+  <p>Check your upcoming appointments and details.</p>
+  <a href="viewCustomer" class="btn btn-outline-dark btn-lg">View My Appointments</a>
+</section>
+
+<!-- Gallery -->
+<section class="container py-5" id="gallery">
+  <h2 class="text-center mb-4">Gallery</h2>
+  <div class="row g-4 gallery">
+    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1603297632053-cb0d97139913" class="img-fluid rounded" alt="Haircut"></div>
+    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1597256200443-6e1405f4b17f" class="img-fluid rounded" alt="Beard"></div>
+    <div class="col-md-4"><img src="https://images.unsplash.com/photo-1571175351233-df8e16166841" class="img-fluid rounded" alt="Interior"></div>
+  </div>
+</section>
+
+<!-- About Us -->
+<section class="container py-5" id="about">
+  <h2 class="text-center mb-3">About Us</h2>
+  <p class="text-center mx-auto" style="max-width: 600px;">
+    Astu Barber is where classic meets modern. With years of experience, our barbers provide top-tier grooming to every customer who walks through our door.
+  </p>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6"><img src="https://images.unsplash.com/photo-1600080213300-9dc43b2ecb65" class="img-fluid rounded" alt="Team"></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="mt-5" id="contact">
+  <div class="container">
+    <p>📍 No.12, Jalan Gaya, Kuala Lumpur | 📞 012-3456789 | 📧 barber@email.com</p>
+    <p>Open Daily: 10:00 AM – 9:00 PM</p>
+    <p>
+      <a href="#">Facebook</a> |
+      <a href="#">Instagram</a> |
+      <a href="#">TikTok</a>
+    </p>
+    <p>&copy; 2025 Astu Barber Shop. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- JS for Service and Add-on Details -->
+<script>
+  const serviceDetails = {
+    haircut: {
+      title: 'Haircut',
+      description: 'Choose from classic or trendy styles tailored to suit your face shape. We cut with precision and consult with care.'
+    },
+    beard: {
+      title: 'Beard Trim',
+      description: 'Get your beard perfectly shaped and cleaned using professional tools and techniques.'
+    },
+    shaving: {
+      title: 'Shaving',
+      description: 'A soothing hot towel shave using premium blades and aftercare for a refreshing finish.'
+    },
+    coloring: {
+      title: 'Hair Coloring',
+      description: 'From subtle highlights to bold tones, our coloring services are safe and stylish.'
+    },
+    massage: {
+      title: 'Massage',
+      description: 'Relax your body and mind with a professional full-body massage designed to relieve tension and improve circulation.'
+    },
+    facial: {
+      title: 'Facial',
+      description: 'Nourish and rejuvenate your skin with our tailored facial treatments that cleanse, exfoliate, and hydrate.'
+    },
+    scalpTreatment: {
+      title: 'Scalp Treatment',
+      description: 'Stimulate your scalp with our specialized treatments promoting healthy hair growth and relaxation.'
+    }
+  };
+
+  // Show details on service button click
+  document.querySelectorAll('.service-card button').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const card = e.target.closest('.service-card');
+      const service = card.getAttribute('data-service');
+      showDetail(service);
+    });
+  });
+
+  // Show details on addon image click
+  document.querySelectorAll('.addon-card img').forEach(img => {
+    img.addEventListener('click', (e) => {
+      const addon = e.target.closest('.addon-card').getAttribute('data-addon');
+      showDetail(addon);
+    });
+  });
+
+  function showDetail(key) {
+    document.getElementById('detail-title').innerText = serviceDetails[key].title;
+    document.getElementById('detail-description').innerText = serviceDetails[key].description;
+    document.getElementById('service-detail-box').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('service-detail-box').offsetTop - 100, behavior: 'smooth' });
+  }
+
+  function hideDetail() {
+    document.getElementById('service-detail-box').style.display = 'none';
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

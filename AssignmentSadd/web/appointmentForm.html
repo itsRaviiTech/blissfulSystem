@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointment</title>
+</head>
+<body>
+    <h2>Book an Appointment</h2>
+    <form action="BookAppointmentServlet" method="post">
+        Name: <input type="text" name="name" required><br><br>
+        Date: <input type="date" name="date" required><br><br>
+        Service:
+        <select name="service" required>
+            <option value="Haircut">Haircut</option>
+            <option value="Massage">Massage</option>
+            <option value="Consultation">Consultation</option>
+        </select><br><br>
+        Time:
+        <select name="time" required>
+            <option value="09:00 AM">09:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+        </select><br><br>
+
+        <input type="submit" value="Book Appointment">
+    </form>
+</body>
+</html>
